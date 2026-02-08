@@ -1,0 +1,41 @@
+body {
+    background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+    font-family: 'Segoe UI', sans-serif;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh; margin: 0; overflow-x: hidden; text-align: center;
+    transition: background 1s ease;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.95); padding: 20px;
+    border-radius: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    width: 90%; max-width: 450px; z-index: 10; margin: 20px;
+}
+
+.hidden { display: none; }
+.gif-style { width: 100%; max-width: 250px; border-radius: 15px; margin: 10px 0; }
+
+.octopus-wrapper { position: relative; height: 220px; margin-top: 10px; }
+.octopus { width: 70px; height: 70px; border-radius: 50% 50% 40% 40%; margin: 0 auto; transition: 0.5s; position: relative; z-index: 5;}
+.smiling { background: #4cc9f0; }
+.angry { background: #ff4d6d; transform: scale(1.1); }
+
+.eye { width: 8px; height: 8px; background: black; border-radius: 50%; display: inline-block; margin: 20px 6px 0; }
+.mouth-smile { width: 15px; height: 8px; border-bottom: 2px solid black; border-radius: 50%; margin: 5px auto; }
+.mouth-angry { width: 15px; height: 2px; background: black; margin: 10px auto; }
+
+.arm { position: absolute; top: 60px; width: 130px; transition: 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28); }
+.left-arm { left: -5px; border-top: 5px solid #4cc9f0; border-radius: 40px 0 0 0; padding-top: 15px; }
+.right-arm { right: -5px; border-top: 5px solid #4cc9f0; border-radius: 0 40px 0 0; padding-top: 15px; }
+.octopus.angry ~ .left-arm, .octopus.angry ~ .right-arm { border-color: #ff4d6d; }
+
+button { padding: 10px 15px; font-weight: bold; border: none; border-radius: 12px; cursor: pointer; font-size: 0.9rem; }
+.yes-btn { background: #4361ee; color: white; }
+.no-btn { background: #f8f9fa; color: #555; border: 1px solid #ddd; }
+
+.pulse { animation: pulse 1.5s infinite; }
+@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+
+.heart { position: fixed; top: -1vh; font-size: 1.5rem; color: rgba(255,255,255,0.6); animation: fall linear forwards; pointer-events: none; }
+@keyframes fall { to { transform: translateY(105vh); } }
+.retry-btn { background: black; color: white; margin-top: 15px; width: 60%; }

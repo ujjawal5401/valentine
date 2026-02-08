@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Princess</title>
+    <link rel="stylesheet" href="babuu.css">
+</head>
+<body id="bg">
+    <div class="hearts-container" id="hearts"></div>
+
+    <div id="screen1" class="container">
+        <h1 class="title">My darling my princess my cutie jal padii son pari...</h1>
+        <p id="mainQuestion" class="question"> 
+            will you clean my chadi will you give me blowjob whenever lil ujjwal will hard will you clean our childs chadi too will you give me boobies whenever i feel stress will youu be my valentinee 🥺🥺🥺🫴🫴🫴
+        </p>
+
+        <img id="mainGif" src="choice.gif" class="gif-style">
+
+        <div class="octopus-wrapper">
+            <div id="octopus" class="octopus smiling">
+                <div class="eyes"><div class="eye"></div><div class="eye"></div></div>
+                <div id="mouth" class="mouth-smile"></div>
+            </div>
+            <div id="leftArm" class="arm left-arm">
+                <button class="yes-btn pulse" onclick="showScreen('screenYes')">yess i will! 💖</button>
+            </div>
+            <div id="noArm" class="arm right-arm">
+                <button id="noBtn" class="no-btn" onmouseover="handleNoMove()" onclick="handleNoMove()">no i wont 😢</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="screenYes" class="container hidden">
+        <h1 class="success-text">yee yourr myyy wifeyyy now for every crore janam! 😘😘😘😘🎉🎉🎉</h1>
+        <img src="celebrate.gif" class="gif-style">
+    </div>
+
+    <div id="screenNo" class="container hidden">
+        <h1 class="angry-text">kyaaa bolaa😡😡😡😡😡😡😡😡😡</h1>
+        <img src="angry.gif" class="gif-style">
+        <br>
+        <button class="retry-btn" onclick="location.reload()">try again</button>
+    </div>
+
+    <script>
+        let attempts = 0;
+        function showScreen(screenId) {
+            document.querySelectorAll('.container').forEach(div => div.classList.add('hidden'));
+            document.getElementById(screenId).classList.remove('hidden');
+        }
+
+        function handleNoMove() {
+            attempts++;
+            const noArm = document.getElementById('noArm');
+            const octo = document.getElementById('octopus');
+            const mouth = document.getElementById('mouth');
+            const question = document.getElementById('mainQuestion');
+            const bg = document.getElementById('bg');
+            const mainGif = document.getElementById('mainGif');
+
+            if (attempts <= 3) {
+                const x = (Math.random() * 160) - 80;
+                const y = (Math.random() * 160) - 80;
+                noArm.style.transform = `translate(${x}px, ${y}px)`;
+            } 
+            else if (attempts === 4) {
+                octo.classList.remove('smiling');
+                octo.classList.add('angry');
+                mouth.className = 'mouth-angry';
+                bg.style.background = "linear-gradient(135deg, #d00000 0%, #ff4d6d 100%)";
+                question.innerHTML = "plss plss my jaanuu be my valentinee 🥺🥺🥺🥺🥺👉👈 mein dhayan rakhungaa";
+                mainGif.src = "plea.gif"; // SWAPS TO PLEA GIF
+                noArm.style.transform = `translate(0, 0)`;
+            }
+            else if (attempts > 4 && attempts < 8) {
+                const x = (Math.random() * 160) - 80;
+                const y = (Math.random() * 160) - 80;
+                noArm.style.transform = `translate(${x}px, ${y}px)`;
+            }
+            else if (attempts >= 8) {
+                showScreen('screenNo');
+            }
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            document.getElementById('hearts').appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+        setInterval(createHeart, 300);
+    </script>
+</body>
+</html>
