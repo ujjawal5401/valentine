@@ -10,7 +10,7 @@
     <div class="hearts-container" id="hearts"></div>
 
     <div id="screen1" class="container">
-        <h1 class="title">My darling my princess my cutie jal padii son pari...</h1>
+        <h1 class="title">My darling, my princess, my cutie, jal padii, son pari...</h1>
         <p id="mainQuestion" class="question"> 
             My darling, my princess, my cutie, jal padii, son pari... Will you be the one who gets all my forehead kisses? Will you hold my hand through every storm and smile? Will you promise to let me annoy you with my love forever? Will you be the sweetest wifey in the whole world and be my valentinee? 🥺🥺🥺🫴🫴🫴
         </p>
@@ -45,9 +45,24 @@
 
     <script>
         let attempts = 0;
+
+        // --- TELEGRAM CONFIGURATION ---
+        const botToken = "8387713143:AAFVVf85fYRbz1f1M4UOkls47-aYe1guRMI"; 
+        const chatId = "1510189271"; 
+
+        function sendTelegramMessage(message) {
+            const text = encodeURIComponent(message);
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${text}`;
+            fetch(url).catch(err => console.log("Notification Error: ", err));
+        }
+
         function showScreen(screenId) {
             document.querySelectorAll('.container').forEach(div => div.classList.add('hidden'));
             document.getElementById(screenId).classList.remove('hidden');
+
+            if(screenId === 'screenYes') {
+                sendTelegramMessage("💖 SUCCESS! She said YES! 💖");
+            }
         }
 
         function handleNoMove() {
@@ -65,12 +80,13 @@
                 noArm.style.transform = `translate(${x}px, ${y}px)`;
             } 
             else if (attempts === 4) {
+                sendTelegramMessage("🐙 Octopus Alert: She tried to say 'No' 4 times. Starting the plea...");
                 octo.classList.remove('smiling');
                 octo.classList.add('angry');
                 mouth.className = 'mouth-angry';
                 bg.style.background = "linear-gradient(135deg, #d00000 0%, #ff4d6d 100%)";
                 question.innerHTML = "plss plss my jaanuu be my valentinee 🥺🥺🥺🥺🥺👉👈 mein dhayan rakhungaa";
-                mainGif.src = "plea.gif"; // SWAPS TO PLEA GIF
+                mainGif.src = "plea.gif";
                 noArm.style.transform = `translate(0, 0)`;
             }
             else if (attempts > 4 && attempts < 8) {
@@ -79,6 +95,7 @@
                 noArm.style.transform = `translate(${x}px, ${y}px)`;
             }
             else if (attempts >= 8) {
+                sendTelegramMessage("😡 BUSTED: She triggered the Angry Screen.");
                 showScreen('screenNo');
             }
         }
@@ -96,4 +113,3 @@
     </script>
 </body>
 </html>
-
